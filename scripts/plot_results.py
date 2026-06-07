@@ -154,6 +154,47 @@ def plot_gather(results_dir, charts_dir):
     save(fig, charts_dir / "gather_frequency.png")
 
 
+def plot_compute_heavy(results_dir, charts_dir):
+    path = results_dir / "strong_scaling_compute_heavy_5000_50000_ants5000.csv"
+    if not path.exists():
+        return
+
+    rows = read_csv(path)
+    p = ints(rows, "processes")
+    speedup = floats(rows, "speedup")
+    efficiency = floats(rows, "efficiency_percent")
+    compute = floats(rows, "compute_seconds")
+    communication = floats(rows, "communication_seconds")
+
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    ax.plot(p, speedup, marker="o", label="speedup")
+    ax.plot(p, p, "--", color="gray", label="ideal")
+    ax.set_title("Compute-Heavy Strong Scaling (N=5000, T=50000, ants=5000)")
+    ax.set_xlabel("Numar procese")
+    ax.set_ylabel("Speedup")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    save(fig, charts_dir / "compute_heavy_speedup.png")
+
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    ax.plot(p, efficiency, marker="o")
+    ax.set_title("Compute-Heavy Eficienta")
+    ax.set_xlabel("Numar procese")
+    ax.set_ylabel("Eficienta (%)")
+    ax.grid(True, alpha=0.3)
+    save(fig, charts_dir / "compute_heavy_efficiency.png")
+
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    ax.plot(p, compute, marker="o", label="calcul")
+    ax.plot(p, communication, marker="o", label="comunicare")
+    ax.set_title("Compute-Heavy Calcul vs Comunicare")
+    ax.set_xlabel("Numar procese")
+    ax.set_ylabel("Timp (s)")
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    save(fig, charts_dir / "compute_heavy_compute_vs_comm.png")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--results-dir", default="results_large")
@@ -169,6 +210,7 @@ def main():
     plot_weak(results_dir, charts_dir)
     plot_migration(results_dir, charts_dir)
     plot_gather(results_dir, charts_dir)
+    plot_compute_heavy(results_dir, charts_dir)
 
     for path in sorted(charts_dir.glob("*.png")):
         print(path)

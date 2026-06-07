@@ -224,6 +224,9 @@ Graficele generate:
 - `strong_efficiency.png`
 - `strong_elapsed.png`
 - `compute_communication_io.png`
+- `compute_heavy_speedup.png`
+- `compute_heavy_efficiency.png`
+- `compute_heavy_compute_vs_comm.png`
 - `weak_scaling.png`
 - `migration_overhead.png`
 - `gather_frequency.png`
@@ -233,12 +236,15 @@ Graficele generate:
 Rezultatele recomandate pentru raport sunt in `results_final/`. Acestea au fost rulate fara oversubscription, folosind doar procesele disponibile local (`P=1,2,4`). Setul include:
 
 - strong scaling pentru `N=500`, `N=1000`, `N=5000`, cu `T=100000`;
+- benchmark compute-heavy pentru `N=5000`, `T=50000`, `ants=5000`, util pentru a evidentia scalarea cand calculul domina mai mult comunicarea;
 - weak scaling cu `T=100000`;
 - overhead de migrare pentru `ants=1,10,100,1000`;
 - impactul frecventei de colectare pentru `gather_every=1,10,100,1000`;
 - comparatie de corectitudine `seq` vs. `MPI 4 procese` pe `N=1000`, `T=100000`, `ants=100`.
 
 Nota: rezultatele anterioare din `results_large/` includ si rulari `P=8/16` cu oversubscription in WSL. Pentru concluzii curate de performanta locala, foloseste `results_final/`. Pentru `P=8/16` corect, reruleaza acele cazuri pe cluster real.
+
+In setul local standard, comunicarea MPI domina pentru putine furnici si speedup-ul poate deveni subunitar. Benchmark-ul compute-heavy cu `5000` furnici arata comportamentul mai relevant pentru sarcini mari: pe masina locala s-a obtinut speedup `2.86` si eficienta `71.40%` la `4` procese.
 
 ## Fisiere importante
 
