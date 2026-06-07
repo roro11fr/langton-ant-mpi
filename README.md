@@ -140,6 +140,8 @@ Furnicile sunt stocate numai pe rank-ul care detine randul lor curent. Dupa fiec
 
 Pentru grila toroidala, primul rank comunica circular cu ultimul rank. Pentru `--torus false`, furnicile care ies din domeniul global sunt eliminate.
 
+Ghost rows sunt pastrate pentru conformitate cu modelul clasic de partitionare de domeniu si pentru extensii ale automatului celular care folosesc vecinatati. In regula standard Langton, furnica decide pe baza celulei curente, nu a celulei destinatie; de aceea corectitudinea este asigurata in principal prin migrarea furnicii catre procesul proprietar inainte de pasul urmator.
+
 ### Colectare si output
 
 La final, rank 0 colecteaza grila cu `MPI_Gatherv` si furnicile cu un gather de mesaje serializate. Daca se seteaza `--gather-every`, aceeasi colectare se face periodic. Daca exista si `--frames-prefix`, rank 0 scrie cate un fisier PPM pentru fiecare cadru.
@@ -198,6 +200,13 @@ Pe WSL sau laptop, daca OpenMPI raporteaza prea putine sloturi:
 OVERSUBSCRIBE=1 PROCS="1 2 4 8" SIZE=1000 STEPS=10000 ANTS=100 ./scripts/run_benchmarks.sh
 ```
 
+Benchmark-ul compute-heavy folosit in rezultatele finale:
+
+```bash
+chmod +x scripts/run_compute_heavy.sh
+./scripts/run_compute_heavy.sh
+```
+
 Campania completa de experimente din PDF:
 
 ```bash
@@ -216,6 +225,13 @@ Pentru grafice:
 
 ```bash
 python3 scripts/plot_results.py --results-dir results_final --charts-dir results_final/charts
+```
+
+Pentru arhiva de predare, fara `.git/`, `build/` si PPM-uri temporare:
+
+```bash
+chmod +x scripts/package_submission.sh
+./scripts/package_submission.sh
 ```
 
 Graficele generate:
@@ -248,5 +264,7 @@ In setul local standard, comunicarea MPI domina pentru putine furnici si speedup
 - `src/mpi_simulation.cpp`: partitionare, ghost rows, migrare, gather, timere MPI.
 - `src/ppm.cpp`: export imagine PPM.
 - `scripts/run_benchmarks.sh`: benchmark strong scaling cu speedup, eficienta si fractie seriala.
+- `scripts/run_compute_heavy.sh`: reproduce benchmark-ul principal compute-heavy din `results_final`.
 - `scripts/run_experiments.sh`: experimentele recomandate in PDF.
 - `scripts/plot_results.py`: generare grafice pentru raport.
+- `scripts/package_submission.sh`: creeaza arhiva curata pentru predare.
