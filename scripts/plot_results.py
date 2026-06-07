@@ -30,6 +30,9 @@ def save(fig, path):
 
 def plot_strong(results_dir, charts_dir):
     strong_files = sorted(results_dir.glob("strong_scaling_*_100000.csv"))
+    if not strong_files:
+        return
+
     fig_speed, ax_speed = plt.subplots(figsize=(7, 4.5))
     fig_eff, ax_eff = plt.subplots(figsize=(7, 4.5))
     fig_times, ax_times = plt.subplots(figsize=(7, 4.5))
@@ -79,6 +82,9 @@ def plot_strong(results_dir, charts_dir):
 
 def plot_compute_vs_comm(results_dir, charts_dir):
     path = results_dir / "strong_scaling_1000_100000.csv"
+    if not path.exists():
+        return
+
     rows = read_csv(path)
     p = ints(rows, "processes")
     compute = floats(rows, "compute_seconds")
