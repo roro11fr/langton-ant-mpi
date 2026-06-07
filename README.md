@@ -240,6 +240,7 @@ Graficele generate:
 - `compute_heavy_efficiency.png`
 - `compute_heavy_compute_vs_comm.png`
 - `weak_scaling.png`
+- `weak_scaling_density.png`
 - `migration_overhead.png`
 - `gather_frequency.png`
 
@@ -248,7 +249,7 @@ Graficele generate:
 Rezultatele recomandate pentru raport sunt in `results_final/`. Acestea au fost rulate fara oversubscription, folosind doar procesele disponibile local (`P=1,2,4`). Setul include:
 
 - strong scaling compute-heavy pentru `N=5000`, `T=50000`, `ants=5000`, util pentru a evidentia scalarea cand calculul domina mai mult comunicarea;
-- weak scaling cu `T=100000`;
+- weak scaling cu `T=100000`, in doua variante: grila scalata cu furnici constante si grila scalata cu furnici scalate proportional cu numarul de procese;
 - overhead de migrare pentru `ants=1,10,100,1000`;
 - impactul frecventei de colectare pentru `gather_every=1,10,100,1000`;
 - comparatie de corectitudine `seq` vs. `MPI 4 procese` pe `N=1000`, `T=100000`, `ants=100`.
@@ -265,6 +266,7 @@ In setul local standard, comunicarea MPI domina pentru putine furnici si speedup
 - `src/ppm.cpp`: export imagine PPM.
 - `scripts/run_benchmarks.sh`: benchmark strong scaling cu speedup, eficienta si fractie seriala.
 - `scripts/run_compute_heavy.sh`: reproduce benchmark-ul principal compute-heavy din `results_final`.
+- `scripts/run_weak_density.sh`: reproduce weak scaling-ul strict, cu densitate de furnici per proces constanta.
 - `scripts/run_experiments.sh`: experimentele recomandate in PDF.
 - `scripts/plot_results.py`: generare grafice pentru raport.
 - `scripts/package_submission.sh`: creeaza arhiva curata pentru predare.

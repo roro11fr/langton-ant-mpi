@@ -104,22 +104,30 @@ def plot_compute_vs_comm(results_dir, charts_dir):
 
 
 def plot_weak(results_dir, charts_dir):
-    rows = read_csv(results_dir / "weak_scaling_100000.csv")
-    p = ints(rows, "processes")
-    elapsed = floats(rows, "elapsed_seconds")
-    compute = floats(rows, "compute_seconds")
-    communication = floats(rows, "communication_seconds")
+    for filename, title, output in [
+        ("weak_scaling_100000.csv", "Weak Scaling - Grila Scalata", "weak_scaling.png"),
+        ("weak_scaling_density_100000.csv", "Weak Scaling - Grila si Furnici Scalate", "weak_scaling_density.png"),
+    ]:
+        path = results_dir / filename
+        if not path.exists():
+            continue
 
-    fig, ax = plt.subplots(figsize=(7, 4.5))
-    ax.plot(p, elapsed, marker="o", label="total")
-    ax.plot(p, compute, marker="o", label="calcul")
-    ax.plot(p, communication, marker="o", label="comunicare")
-    ax.set_title("Weak Scaling")
-    ax.set_xlabel("Numar procese")
-    ax.set_ylabel("Timp (s)")
-    ax.grid(True, alpha=0.3)
-    ax.legend()
-    save(fig, charts_dir / "weak_scaling.png")
+        rows = read_csv(path)
+        p = ints(rows, "processes")
+        elapsed = floats(rows, "elapsed_seconds")
+        compute = floats(rows, "compute_seconds")
+        communication = floats(rows, "communication_seconds")
+
+        fig, ax = plt.subplots(figsize=(7, 4.5))
+        ax.plot(p, elapsed, marker="o", label="total")
+        ax.plot(p, compute, marker="o", label="calcul")
+        ax.plot(p, communication, marker="o", label="comunicare")
+        ax.set_title(title)
+        ax.set_xlabel("Numar procese")
+        ax.set_ylabel("Timp (s)")
+        ax.grid(True, alpha=0.3)
+        ax.legend()
+        save(fig, charts_dir / output)
 
 
 def plot_migration(results_dir, charts_dir):

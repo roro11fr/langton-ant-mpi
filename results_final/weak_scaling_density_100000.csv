@@ -1,0 +1,4 @@
+experiment,processes,size,steps,ants,elapsed_seconds,compute_seconds,communication_seconds,io_seconds
+weak_density,1,500,100000,100,4.68589,4.05876,0.195095,0.000271638
+weak_density,2,707,100000,200,6.32348,4.90046,1.22357,0.000337132
+weak_density,4,1000,100000,400,8.49085,5.66028,2.91898,0.00105884

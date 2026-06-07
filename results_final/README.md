@@ -5,7 +5,8 @@ Acest director contine setul recomandat pentru predare. Masuratorile sunt rulate
 ## Fisiere CSV
 
 - `strong_scaling_compute_heavy_5000_50000_ants5000.csv`: strong scaling principal, cu suficient calcul per proces pentru a evidentia paralelizarea.
-- `weak_scaling_100000.csv`: weak scaling.
+- `weak_scaling_100000.csv`: weak scaling cu grila scalata si numar constant de furnici.
+- `weak_scaling_density_100000.csv`: weak scaling mai strict, cu grila si numarul de furnici scalate proportional cu numarul de procese.
 - `migration_overhead_1000_100000.csv`: impactul numarului de furnici asupra timpului total, calculului si comunicarii.
 - `gather_frequency_1000_10000.csv`: impactul frecventei colectarii globale.
 
@@ -17,6 +18,7 @@ Graficele pentru raport sunt in `charts/`:
 - `compute_heavy_efficiency.png`
 - `compute_heavy_compute_vs_comm.png`
 - `weak_scaling.png`
+- `weak_scaling_density.png`
 - `migration_overhead.png`
 - `gather_frequency.png`
 
