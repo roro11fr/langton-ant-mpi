@@ -5,6 +5,7 @@ results*/
 *.ppm
 *.csv
 *.log
+*.zip
 !results_final/
 !results_final/*.csv
 !results_final/charts/
