@@ -1,0 +1,4 @@
+processes,elapsed_seconds,compute_seconds,communication_seconds,io_seconds,speedup,efficiency_percent,serial_fraction
+1,8.70697,7.44888,0.505147,0.0147542,1.000000,100.00,0.000000
+2,18.7678,6.51336,12.6447,0.0518458,0.463931,23.20,3.310986
+4,22.4244,2.73452,19.939,0.0404523,0.388281,9.71,3.100606

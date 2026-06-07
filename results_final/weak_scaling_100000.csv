@@ -1,0 +1,4 @@
+experiment,processes,size,steps,ants,elapsed_seconds,compute_seconds,communication_seconds,io_seconds
+weak,1,500,100000,100,4.53913,3.94552,0.176572,0.000169013
+weak,2,707,100000,100,3.00709,2.28743,0.763332,0.000418674
+weak,4,1000,100000,100,2.10965,1.46818,0.992272,0.000530012

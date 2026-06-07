@@ -1,0 +1,11 @@
+build/
+frames/
+results/
+results*/
+*.ppm
+*.csv
+*.log
+!results_final/
+!results_final/*.csv
+!results_final/charts/
+!results_final/charts/*.png
